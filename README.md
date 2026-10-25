@@ -12,6 +12,6 @@ spec §9.2 differential parser oracle that revokt's CI checks out at a pinned ta
 
 | Path | Contents | Licence |
 |---|---|---|
-| (none yet) | | |
+| `x509-limbo/` | C2SP x509-limbo `limbo.json` at commit `554528a` (9802 testcases, 30379 certificates), the spec §9.2 seed corpus's `x509-limbo` vectors | Apache-2.0 |
 
 The repository's own files are Apache-2.0 (`LICENSE`); each corpus directory carries its upstream licence.

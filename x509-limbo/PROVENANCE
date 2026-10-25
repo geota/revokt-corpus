@@ -1,0 +1,6 @@
+source: https://github.com/C2SP/x509-limbo
+commit: 554528a9b0c0d95e071f55de018326f0b65a8364 (main, committed 2026-09-24T00:08:52Z; the project publishes no releases)
+files: limbo.json and LICENSE at that commit, byte for byte
+retrieved: 2026-10-25
+licence: Apache-2.0 (LICENSE)
+contents: limbo.json version 1, 9802 testcases, 30379 distinct PEM certificates (trusted, intermediates, peers)

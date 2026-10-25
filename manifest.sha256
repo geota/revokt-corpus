@@ -1,2 +1,5 @@
 # sha256  path   (every file but this manifest and README.md; regenerated only when a corpus is admitted)
 074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff  LICENSE
+aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe  x509-limbo/LICENSE
+9f136f76a543abeae97e967635186b649d8a05d6c051bbe93755f409de424c9c  x509-limbo/PROVENANCE
+611e337b9fb477b927bae65434650692cb9d2070ff5b05f975d0403510acd4de  x509-limbo/limbo.json
