@@ -1,0 +1,17 @@
+A pilot of revokt's CT seed corpus (spec §9.2: at least 100 000 CT leaves across the CRLite-enrolled logs),
+collected on 2026-10-25 by tools/ct-seed/collect.py:
+  python3 -I tools/ct-seed/collect.py --ct-logs ct-seed/ct-logs.json --seed 20261025 --tiles 1 --batches 4 --out ct-seed
+ct-logs.json
+  url: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/ct-logs/changeset?_expected=0
+  retrieved: 2026-10-25T18:25:31Z
+  sha256: a611aa4ab116e0bb95dc8430e7f7223125a8524a181c8fe673014cc26faa5fa3
+leaves.tsv.gz: 22559 distinct certificates as logged (final certificates of x509 entries, precertificates of precert
+  entries), from one random full data tile of each static-ct-api log and four random get-entries batches of each
+  RFC 6962 log, from 80 of the 81 CRLite-enrolled logs; sample.json records every log, tree size and index read, and the
+  one log that did not answer (Let's Encrypt Oak2026h2, get-sth).
+  sha256: 0493d6b4e24e7c90c722d7308bc3aed2508332e0f219c04324413afccc99fb1b
+licence: the leaves are CT log entries, public records; ct-logs.json is Mozilla Remote Settings data.
+limits of this pilot's collector (to be addressed for the full corpus, revokt #64): some logs return fewer get-entries
+  than asked (23 343 entries were read against a nominal 36 608), and the collector does not page; sample.json has
+  no collection timestamp (the ct-logs snapshot's retrieval time stands for it); a tiled log's "indices" is empty
+  and its "tiles" lists the tiles chosen; entries are not checked against a checkpoint or an inclusion proof.

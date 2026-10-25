@@ -1,0 +1,28 @@
+Notices for issuer/ (revokt-corpus)
+
+Common CA Database (CCADB)
+  ccadb-mozilla-unexpired/ and ccadb-all/'s CSV exports are data of the Common CA Database (https://www.ccadb.org/),
+  made available under the
+  Community Data License Agreement - Permissive, Version 2.0 (LICENSES/CDLA-Permissive-2.0.txt,
+  https://cdla.dev/permissive-2-0/). Attribution: "Common CA Database (CCADB)", https://www.ccadb.org/rootstores/usage.
+  The data is provided as is; revokt-corpus redistributes it unmodified.
+
+Mozilla Remote Settings (security-state/intermediates)
+  mozilla-intermediates/ holds Mozilla's intermediates collection, which Mozilla populates from CCADB; the same
+  CCADB attribution and licence apply to the certificate data.
+
+OpenJDK cacerts (Eclipse Temurin)
+  jdk-cacerts/ holds keytool's listing of each JDK's cacerts store, which ships with OpenJDK under the GNU General
+  Public License, version 2, with the Classpath Exception (LICENSES/GPL-2.0-only.txt,
+  LICENSES/Classpath-exception-2.0.txt).
+
+crt.sh
+  ccadb-all/crtsh/ holds 15 certificates retrieved from crt.sh (https://crt.sh/) by the SHA-256 fingerprints CCADB's
+  all-records export names; crt.sh states no data licence. They are CA-published certificates, unmodified.
+
+AOSP ca-certificates
+  aosp/ holds the Android Open Source Project's platform/system/ca-certificates files, extracted unmodified. AOSP
+  declares no licence text for them: the repository's Android.bp gives `license_kinds: ["legacy_by_exception_only"]`
+  with an empty `license_text`, and it carries no LICENSE or NOTICE. They are CA-published certificates.
+
+The certificates themselves are public, published by the CAs that issued them.

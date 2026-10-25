@@ -1,0 +1,253 @@
+The issuer corpus of revokt's spec §9.2 ("Issuer corpus (zero tolerance)", revision 42): snapshots taken on
+2026-10-25 for the committed fixture generation (revokt corpus/clubcard: 20261017-1 full, 20261021-1 delta). Every
+index key of both filters is SHA-256 of the raw SPKI of a certificate here, so no index key needed a certificate
+fetched from CT by SPKI hash. Each file below is the raw download (or export), unmodified; aosp/files/ is its archive
+extracted. The CCADB all-certificate-records export carries no PEM: its certificates come from the
+AllCertificatePEMsCSVFormat export by NotBeforeYear, and the 15 that export lacks (all revoked) from crt.sh by
+fingerprint (ccadb-all/crtsh/). AOSP ca-certificates main stands in for the pinned images' sources until the 0.3
+images are pinned.
+licence: see NOTICE (CCADB data under CDLA-Permissive-2.0 with attribution; the JDK cacerts under GPLv2 with the
+  Classpath Exception; the crt.sh and AOSP files, for which no licence is declared, are CA-published certificates);
+  the licence texts are in LICENSES/.
+
+ccadb-mozilla-unexpired/MozillaAllUnexpiredPEMs.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/Report?Name=MozillaAllUnexpiredPEMs
+  retrieved: 2026-10-25T18:19:01Z
+  sha256: cb549aa839806cdef495fdc43ec766eb3285f43b5d91d5e1e0f339f7057434fb
+ccadb-all/AllCertificateRecordsCSVFormatv4.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificateRecordsCSVFormatv4
+  retrieved: 2026-10-25T18:41:37Z
+  sha256: c360ab2705e11d51b19abdcc733b4887f0059a2baf06b3c476c17909ab580d92
+ccadb-all/pems/1994.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1994
+  retrieved: 2026-10-25T18:42:07Z
+  sha256: 33a8f7dd179c5ab4401bfd198889c3c6cf1b841f2d406ad399e0e3c95a0820df
+ccadb-all/pems/1995.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1995
+  retrieved: 2026-10-25T18:42:09Z
+  sha256: 985334d56ff8c0164b79d2d1eb6eeca7de10ba198a9414ac9ed5b0bcc9d8a579
+ccadb-all/pems/1996.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1996
+  retrieved: 2026-10-25T18:42:11Z
+  sha256: e11aab48cf034be6be1c21fdc83233c81b1241922c2d21a2ee6551f451cee9e8
+ccadb-all/pems/1997.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1997
+  retrieved: 2026-10-25T18:42:12Z
+  sha256: 24b49aedb6066b04aa6c37bb1d47c86fc077d6dd2a260c1cf8448656768a5e64
+ccadb-all/pems/1998.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1998
+  retrieved: 2026-10-25T18:42:14Z
+  sha256: b91c4d1bf8495d1f0547adeaa7df6d4b918d170d29a6317616018463dd828283
+ccadb-all/pems/1999.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=1999
+  retrieved: 2026-10-25T18:42:16Z
+  sha256: 000cb91eb1bbcd08fd437ff3d6d83e63cce45195daad14ba8ca983f74169b102
+ccadb-all/pems/2000.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2000
+  retrieved: 2026-10-25T18:42:18Z
+  sha256: 32ffa6923c8f45ccb3296be195e453463811cb6d9f787fff6b834555f1a4320c
+ccadb-all/pems/2001.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2001
+  retrieved: 2026-10-25T18:42:19Z
+  sha256: bccba3df9f37e09f21407f6d057c7d613b141f5799bf1b75ba84fb33c1295720
+ccadb-all/pems/2002.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2002
+  retrieved: 2026-10-25T18:42:21Z
+  sha256: ced3db819e034ce443df40623e949c280e2a9f4d5f2855c9cc6a716cb0b87996
+ccadb-all/pems/2003.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2003
+  retrieved: 2026-10-25T18:42:23Z
+  sha256: 6e7fea169e122d88e3631c23641f81b66b5c1f98270baab19f41e8437f0870a2
+ccadb-all/pems/2004.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2004
+  retrieved: 2026-10-25T18:42:25Z
+  sha256: 0e85b5715e9029c7ac7e786af66f2f6690c110a4459a971576cccc759a9c1e64
+ccadb-all/pems/2005.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2005
+  retrieved: 2026-10-25T18:42:27Z
+  sha256: 0b69705737e02779f2dc0c595ea3c5f4d64076e28777a6f0da77a402b194d0ef
+ccadb-all/pems/2006.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2006
+  retrieved: 2026-10-25T18:42:29Z
+  sha256: a4285bd20c04493f548a8a4ab75b04ff41da7949b766f67ac0aab9159aa9c023
+ccadb-all/pems/2007.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2007
+  retrieved: 2026-10-25T18:42:31Z
+  sha256: dacd547310f4e9eb19f2c8f694032c4275977f743fd13fc12e1f2ea1c765ba22
+ccadb-all/pems/2008.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2008
+  retrieved: 2026-10-25T18:42:33Z
+  sha256: 864f3905213d1476956499ca6c3f0048a5fdbce1694019c66536a614b20effca
+ccadb-all/pems/2009.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2009
+  retrieved: 2026-10-25T18:42:35Z
+  sha256: 63731769a7ff04ea026a58562e17ba4ad368a4e205e597a8ad48f7d4474a36db
+ccadb-all/pems/2010.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2010
+  retrieved: 2026-10-25T18:42:37Z
+  sha256: e98c357979c275e1100c1252df99a5598b0c1638004123e74f1c246d5e5f3a01
+ccadb-all/pems/2011.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2011
+  retrieved: 2026-10-25T18:42:39Z
+  sha256: 9309e523c5d6dcb88773d5f32f2db54ce63fa92b432deb43e43e996a1e5898d5
+ccadb-all/pems/2012.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2012
+  retrieved: 2026-10-25T18:42:41Z
+  sha256: face1ae5be6f24ee9e08e0698609e3bb71fd54b00c973be68052adc870aefa18
+ccadb-all/pems/2013.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2013
+  retrieved: 2026-10-25T18:42:43Z
+  sha256: 993c4d17ca942c16fcfafc15877219fff2f6e04413ce47924f4c1f36dec3aa88
+ccadb-all/pems/2014.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2014
+  retrieved: 2026-10-25T18:42:45Z
+  sha256: 72a59d35fb2933366c07b8aca22d876e6c702dde3293af45d1a6dc62cc6c0ca5
+ccadb-all/pems/2015.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2015
+  retrieved: 2026-10-25T18:42:47Z
+  sha256: ea351fc5e9fdb7e66c82dd3fcbc3f2758a1fb707fbf2f307a5a8e1e9dddf96b8
+ccadb-all/pems/2016.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2016
+  retrieved: 2026-10-25T18:42:50Z
+  sha256: 8812d393f3e8d1d90d63ef46566c36e6a42ac840d69e346c03ddf62e3e4ba9fd
+ccadb-all/pems/2017.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2017
+  retrieved: 2026-10-25T18:42:52Z
+  sha256: 096cbc152845e769a414e6dfe1e9a0d60493411d3d1a2a9d44e5d50558b87637
+ccadb-all/pems/2018.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2018
+  retrieved: 2026-10-25T18:42:54Z
+  sha256: 2f5fd0854fbd676c429af886fc3a19982f33ac9dc82b156bba588ef5e55aff5b
+ccadb-all/pems/2019.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2019
+  retrieved: 2026-10-25T18:42:56Z
+  sha256: 75424558579b3e5325ce8b911048dfabb359ba065d36cf4f3f7de56c5b126e14
+ccadb-all/pems/2020.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2020
+  retrieved: 2026-10-25T18:42:58Z
+  sha256: a632ee51e28de091eed46b273a6f140cf729de43feebf0d25c7f34ca00211b0e
+ccadb-all/pems/2021.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2021
+  retrieved: 2026-10-25T18:43:00Z
+  sha256: a3745aae71f96deee45c569fb967e6cb58087b47e184790de2a0c0b8d30df096
+ccadb-all/pems/2022.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2022
+  retrieved: 2026-10-25T18:43:02Z
+  sha256: 2021ae06f3ba31b99b79f2a53a63ca431f67fe2fbe1f8ca3c620321644b99cf5
+ccadb-all/pems/2023.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2023
+  retrieved: 2026-10-25T18:43:04Z
+  sha256: 6a7b70a54f8068daa6958e1cdd24d9fe5021736451ca2f093f3e17d295206821
+ccadb-all/pems/2024.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2024
+  retrieved: 2026-10-25T18:43:06Z
+  sha256: 9047edfb3d9d482ae2458eccb355e4b74f5dc765677565d8d9208597f75a8869
+ccadb-all/pems/2025.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2025
+  retrieved: 2026-10-25T18:43:09Z
+  sha256: 1f73c02bf149c48c76bdcb65cb0853eb505224c562916cd428bca77de717a0f7
+ccadb-all/pems/2026.csv
+  url: https://ccadb.my.salesforce-sites.com/ccadb/AllCertificatePEMsCSVFormat?NotBeforeYear=2026
+  retrieved: 2026-10-25T18:43:11Z
+  sha256: e56be425edfdbcc0e7b0ffaee6abdad22a98ac2f65660bc06126e4d0155bb696
+mozilla-intermediates/security-state--intermediates.zip
+  url: https://firefox-settings-attachments.cdn.mozilla.net/bundles/security-state--intermediates.zip
+  retrieved: 2026-10-25T18:19:39Z
+  sha256: ab91a4abb6c9aaf116346f6b7d0cc2f5e396829d877aaea18ac218e678d347de
+mozilla-intermediates/changeset.json
+  url: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/intermediates/changeset?_expected=0
+  retrieved: 2026-10-25T18:14:13Z
+  sha256: 42252682e49de1df22e9d4b2861f47e230490754db11108816e23bcb05e5e479
+jdk-cacerts/temurin-17.0.21+9.txt
+  source: `keytool -list -rfc -cacerts -storepass changeit` of temurin-17.0.21+9 (mise), its output unmodified, 2026-10-25T19:39:23Z
+  sha256: b94dd0132082231dc4d9249326bbfb1d02c5c1b28cce714780ed989d6a76436e
+jdk-cacerts/temurin-21.0.13+9.0.LTS.txt
+  source: `keytool -list -rfc -cacerts -storepass changeit` of temurin-21.0.13+9.0.LTS (mise), its output unmodified, 2026-10-25T19:39:23Z
+  sha256: 87ac65ac68f8b0b264378d2981587191d9535d96fc6af45e2219ecc828982538
+jdk-cacerts/temurin-25.0.5+8.0.LTS.txt
+  source: `keytool -list -rfc -cacerts -storepass changeit` of temurin-25.0.5+8.0.LTS (mise), its output unmodified, 2026-10-25T19:39:23Z
+  sha256: 770e314c12790c424d8fa7ffb11a6e0f377a7b24b561ee5a7caf216fe4d19870
+jdk-cacerts/temurin-27.0.0+35.txt
+  source: `keytool -list -rfc -cacerts -storepass changeit` of temurin-27.0.0+35 (mise), its output unmodified, 2026-10-25T19:39:23Z
+  sha256: a97ef5d28193eb11fd2d94c7f2c8d9d13212398e31a7dc850c046539dc7fefad
+aosp/ca-certificates-main.tar.gz
+  url: https://android.googlesource.com/platform/system/ca-certificates/+archive/refs/heads/main/files.tar.gz
+  commit: 45c7f199cb11b08f6d1ae2b75da25e53140a0c7d (committed 2025-02-10)
+  retrieved: 2026-10-25T18:45:00Z
+  sha256: 8b3b8c25c259a6665da95568a0cb8fd91562d54906b231e69bdd02881a1afd9d
+  files/: the archive extracted, byte for byte (149 files)
+ccadb-all/crtsh/01f8971121f4103d30be4235cd7dc0eee6c6ae12fca7750848ea0e2e13fc2428.pem
+  sha256 of the file: bc7d533bc839fcc0cb7907e23c91a8022e9670336f73586985d8df813409a52f
+  url: https://crt.sh/?d=01f8971121f4103d30be4235cd7dc0eee6c6ae12fca7750848ea0e2e13fc2428
+  retrieved: 2026-10-25T20:04:23Z
+  certificate: DPDHL TLS CA I3
+ccadb-all/crtsh/0ab115de9d126a3d4ea10ddf0863cc9d8956744eb7b4ccdab7e57d6a06e58518.pem
+  sha256 of the file: 230059a8fa20814d071b64c4ffda6d24478d47dddabc84ec28ff40e902a9b1f4
+  url: https://crt.sh/?d=0ab115de9d126a3d4ea10ddf0863cc9d8956744eb7b4ccdab7e57d6a06e58518
+  retrieved: 2026-10-25T20:04:43Z
+  certificate: Bayerische SSL-CA-2017-02
+ccadb-all/crtsh/0f751035c18e1d392e9cc557c57e94a55d12fbb086f26a4529e2613625bfd13c.pem
+  sha256 of the file: 6fc076ea1e7b2a9f1e2615a09644bf237a578fef357de5f2f6939704ff09b036
+  url: https://crt.sh/?d=0f751035c18e1d392e9cc557c57e94a55d12fbb086f26a4529e2613625bfd13c
+  retrieved: 2026-10-25T20:04:54Z
+  certificate: Bayerische SSL-CA-2018-01
+ccadb-all/crtsh/3bf1e41503c7f023d0d4caffbe8e51262c2c7310bc6d96e8cc8d143a600aee80.pem
+  sha256 of the file: a81a913b5ddc8e36ac04f58def3d4eca8a66270e406ac2d2121844798ac233a7
+  url: https://crt.sh/?d=3bf1e41503c7f023d0d4caffbe8e51262c2c7310bc6d96e8cc8d143a600aee80
+  retrieved: 2026-10-25T20:05:00Z
+  certificate: Bayerische SSL-CA-2017-01
+ccadb-all/crtsh/43db658dd4e4020f8b5c6bd7107e15e233459a226cd0d77ef8f72b2b1cc29afe.pem
+  sha256 of the file: 21f9eb405ba5e300e0c0bf043e4d26a2f93d4a4238c27fd23c4b1c8505dc3b17
+  url: https://crt.sh/?d=43db658dd4e4020f8b5c6bd7107e15e233459a226cd0d77ef8f72b2b1cc29afe
+  retrieved: 2026-10-25T20:05:04Z
+  certificate: Bayerische SSL-CA-2015-01
+ccadb-all/crtsh/4874758d6563e0433b1edcee7ccc5d9c2aad8eba12bcb0704454bb4ef8eaf799.pem
+  sha256 of the file: e610eb7c71b0ce13dc01fb5c270707ff5208619147833ccfa5749ddbc2b26a33
+  url: https://crt.sh/?d=4874758d6563e0433b1edcee7ccc5d9c2aad8eba12bcb0704454bb4ef8eaf799
+  retrieved: 2026-10-25T20:05:13Z
+  certificate: Bayerische SSL-CA-2016-01
+ccadb-all/crtsh/7160a0d841b1c5c120a08c92de2326483d90d9bfce1984bdd6ff4ab6b7d273c3.pem
+  sha256 of the file: 2eb88803f7ac6b1218346351b95d7a9ab35e6c76c50ce0928efe94e233e9002e
+  url: https://crt.sh/?d=7160a0d841b1c5c120a08c92de2326483d90d9bfce1984bdd6ff4ab6b7d273c3
+  retrieved: 2026-10-25T20:05:22Z
+  certificate: Dell Inc. Enterprise CA - a66c
+ccadb-all/crtsh/805a7b80601a6ffb4abde635ef47705eae17620def9cfaf61462b62d7c4b886a.pem
+  sha256 of the file: e792c5c28b55ff8278fac30547491973fdd0abd25020adf6edd2bee1829a37e3
+  url: https://crt.sh/?d=805a7b80601a6ffb4abde635ef47705eae17620def9cfaf61462b62d7c4b886a
+  retrieved: 2026-10-25T20:06:57Z
+  certificate: Dell Inc. Enterprise CA - a66b
+ccadb-all/crtsh/806a2aa77edbd3c76d8fd066dfb5cc3310f359b0102ce92c0faec16aa43fff0a.pem
+  sha256 of the file: 4f3daeb7cc2eb705988c8116153d80dd6a46b9b552a19e0db5d1255654f1aaf1
+  url: https://crt.sh/?d=806a2aa77edbd3c76d8fd066dfb5cc3310f359b0102ce92c0faec16aa43fff0a
+  retrieved: 2026-10-25T20:07:03Z
+  certificate: Bayerische SSL-CA-2016-02
+ccadb-all/crtsh/8e6930d78a139f3827146a5946ef9fe3a77399b2fd0cebb0b2ed08ee18a1d758.pem
+  sha256 of the file: ce8672c2dfec0b13a72c59fcaee2cd10d2bdeef2fd83117d42e6fded80c25df2
+  url: https://crt.sh/?d=8e6930d78a139f3827146a5946ef9fe3a77399b2fd0cebb0b2ed08ee18a1d758
+  retrieved: 2026-10-25T20:07:10Z
+  certificate: Bayerische SSL-CA-2015-02
+ccadb-all/crtsh/9c009ca2f97ea2cbf28173600def6f7a54c5664599b8ab500ee1885a56e4f270.pem
+  sha256 of the file: 8a6f384096e03eb53ec0ad2a321c775c8ee537015ad36047480056be03793b50
+  url: https://crt.sh/?d=9c009ca2f97ea2cbf28173600def6f7a54c5664599b8ab500ee1885a56e4f270
+  retrieved: 2026-10-25T20:07:17Z
+  certificate: Dell Inc. Enterprise CA - b60a
+ccadb-all/crtsh/a90f97d6b5c7612e020cbbcf0746200c9676e1828c5a850be6bc888c345fa4b5.pem
+  sha256 of the file: f0b779183c48c107b519fbb0856d3345d28b06342be99d3705159ca2227982ce
+  url: https://crt.sh/?d=a90f97d6b5c7612e020cbbcf0746200c9676e1828c5a850be6bc888c345fa4b5
+  retrieved: 2026-10-25T20:07:30Z
+  certificate: Dell Inc. Enterprise CA - a66d
+ccadb-all/crtsh/d852de5d098086dfe9a6f3d728d5261865587c489de675753d272374a5d6e9fc.pem
+  sha256 of the file: be53cc8b8ae626cb46a20211fa1048230b931dc1b44cfa7c4108de162cccfb4e
+  url: https://crt.sh/?d=d852de5d098086dfe9a6f3d728d5261865587c489de675753d272374a5d6e9fc
+  retrieved: 2026-10-25T20:07:42Z
+  certificate: Bayerische SSL-CA-2016-01
+ccadb-all/crtsh/f878b3df213b0817bff1e5ef4e8cd7c9b57c80ffc9f8a7309ea46aaf540bae18.pem
+  sha256 of the file: 198cee091687277c52ae1000e82acb11312b896ddf5075e1294814aac0890b99
+  url: https://crt.sh/?d=f878b3df213b0817bff1e5ef4e8cd7c9b57c80ffc9f8a7309ea46aaf540bae18
+  retrieved: 2026-10-25T20:07:58Z
+  certificate: Bayerische SSL-CA-2014-02
+ccadb-all/crtsh/ff1dd21f1a5d0b452cd969cf4aa553835cabe0293c6c7b009f145aa202c02c8b.pem
+  sha256 of the file: 4cd71dd32c23f6c46386cdd3014997fe69f02f0c3b0564cac4a944d132162ce7
+  url: https://crt.sh/?d=ff1dd21f1a5d0b452cd969cf4aa553835cabe0293c6c7b009f145aa202c02c8b
+  retrieved: 2026-10-25T20:08:22Z
+  certificate: Bayerische SSL-CA-2016-02
