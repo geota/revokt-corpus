@@ -1,5 +1,14 @@
-# sha256  path   (every file but this manifest and README.md; regenerated only when a corpus is admitted)
+# sha256  path   (every file but this manifest and README.md; regenerated whenever a file changes, README.md "Manifest")
+7ebda0c44cb2e42e282e2d3ac0c17d4f7dbf1f1a094490c171831c73f203e58f  .gitattributes
 074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff  LICENSE
+b032d5f7de1cee8dc3ba331e8f47771d66db28bca41a994c4ff3d8da457c792a  replay/3a.tsv.gz
+82677531886301911d91d3ab97a5f80d1531cf96b183dd29c29476e0ea726f93  replay/3b.tsv.gz
+6f1fed8a7a87bd699c82847e853277141f7d04dc026d419226598fe5626ce8db  replay/PROVENANCE
+5b63e9efb5c14198d763408c655dca187f15f01e7a2153b105b58012e68dc3c2  replay/producer.tsv.gz
+92bad8a0778679923ca7b72719cdf0e6bd508e02e080b81d9367e9d583ff8214  replay/records.jsonl
+4f70a4fcabb0f6aa077da57c7bf9dfa9af9c5233aa5f802c7a5e9f0370642e31  replay/zlint.tsv.gz
+c5856a05253cc5665617e2e10fef53cb570d1af3e642d212925428a2b4bbd3d5  tools/limbo-gap-justifications/forms.py
+e1a5cc20e0f9a7b84cd537a2e8fd21ea473cf3749240f95133adf5bd3f9ec37f  tools/limbo-gap-justifications/justify.py
 aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe  x509-limbo/LICENSE
 9f136f76a543abeae97e967635186b649d8a05d6c051bbe93755f409de424c9c  x509-limbo/PROVENANCE
 611e337b9fb477b927bae65434650692cb9d2070ff5b05f975d0403510acd4de  x509-limbo/limbo.json

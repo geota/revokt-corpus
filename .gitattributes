@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 revokt contributors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Corpus files are data: no line-ending conversion on any platform, so they hash as the manifest says.
+* -text

@@ -8,10 +8,19 @@ spec §9.2 differential parser oracle that revokt's CI checks out at a pinned ta
 - **Checked by manifest.** `manifest.sha256` lists every file but itself and this README as `sha256  path`;
   revokt's `verifyCorpusManifest` fails on a missing, unlisted or changed file.
 - **Admitted, never edited.** Each corpus keeps its upstream licence and a `PROVENANCE` file naming its source,
-  version and retrieval date. Data changes arrive as new paths under a new tag, through a revokt PR that pins it.
+  version and retrieval date. Input changes arrive as new paths under a new tag, through a revokt PR that pins it.
+- **Replay data is regenerated in place.** `replay/` holds the oracle goldens and corpus records for these inputs,
+  written by revokt's recorders (`REVOKT_CORPUS`, revokt `docs/dev/corpus.md`) at the same paths under a new tag
+  whenever an input, an oracle pin or the matrix changes. The goldens are never edited by hand. `records.jsonl` also
+  holds the justifications of D8-gap entries no rule justifies, written per entry by
+  `tools/limbo-gap-justifications/` and kept by the recorders on every later run.
+- **Manifest.** Regenerate it after any change, from the repository root:
+  `m=$(head -1 manifest.sha256; find . -path ./.git -prune -o -type f ! -path ./manifest.sha256 ! -path ./README.md -print | sed 's|^\./||' | LC_ALL=C sort | while IFS= read -r f; do shasum -a 256 "$f"; done) && printf '%s\n' "$m" > manifest.sha256`
 
 | Path | Contents | Licence |
 |---|---|---|
 | `x509-limbo/` | C2SP x509-limbo `limbo.json` at commit `554528a` (9802 testcases, 30379 certificates), the spec §9.2 seed corpus's `x509-limbo` vectors | Apache-2.0 |
+| `replay/` | gzipped 3a, 3b, oracle-4 and zlint goldens for those inputs, and their corpus records (`records.jsonl`); `PROVENANCE` names the recorders and pins | Apache-2.0 |
+| `tools/` | `limbo-gap-justifications/`, the generator of the written D8-gap justifications in `replay/records.jsonl` | Apache-2.0 |
 
 The repository's own files are Apache-2.0 (`LICENSE`); each corpus directory carries its upstream licence.
