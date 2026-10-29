@@ -8,19 +8,24 @@ Reads a snapshot of the `security-state/ct-logs` Remote Settings changeset, keep
 certificate of an `x509_entry`, the precertificate of a `precert_entry` (what the producer parses). The choices
 come from `--seed` and the tree sizes read, which `sample.json` records with every index fetched.
 
-  python3 -I collect.py --ct-logs ct-logs.json --seed 20261025 --tiles 1 --batches 4 --out ../../ct-seed
+  python3 -I collect.py --ct-logs ct-logs.json --seed 20261026 --tiles 5 --batches 8 --out ../../ct-seed
 
-Writes `leaves.tsv.gz` (sha256 of the DER, log id, index, entry type, base64 DER; one line per distinct DER, sorted
-by sha256, `gzip -9n`) and `sample.json`. Standard library only; polite: one request at a time, a pause between
+Writes `leaves/<0-f>.tsv.gz` (sha256 of the DER, log id, index, entry type, base64 DER; one line per distinct DER,
+sorted by sha256, in 16 shards by its first hex digit so that no file nears GitHub's 50 MB, `gzip -9n`) and
+`sample.json`, which records the collection's start and end, and per log its checkpoint (tiled) or signed tree head
+(RFC 6962) as read, the tiles read and the index ranges read, a range as each entry is kept so that a log failing
+part-way records what was read. A `get-entries` batch is paged until complete, since logs cap a response. Standard library only; polite: one request at a time, a pause between
 requests, retries with back-off.
 """
 
 import argparse
+import datetime
 import base64
 import gzip
 import hashlib
 import io
 import json
+import os
 import random
 import struct
 import sys
@@ -113,6 +118,18 @@ def tile_path(n):
     return "/".join(["x" + g for g in groups[:-1]] + [groups[-1]])
 
 
+def write_leaves(out, leaves):
+    """`leaves/<0-f>.tsv.gz`: each distinct leaf once, sorted by sha256, in the shard of its first hex digit."""
+    os.makedirs(out + "/leaves", exist_ok=True)
+    shards = {d: io.StringIO() for d in "0123456789abcdef"}
+    for sha in sorted(leaves):
+        log_id, index, kind, der = leaves[sha]
+        shards[sha[0]].write("%s\t%s\t%d\t%d\t%s\n" % (sha, log_id, index, kind, base64.b64encode(der).decode()))
+    for d, buf in shards.items():
+        with open("%s/leaves/%s.tsv.gz" % (out, d), "wb") as f:
+            f.write(gzip.compress(buf.getvalue().encode(), 9, mtime=0))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ct-logs", required=True)
@@ -127,42 +144,50 @@ def main():
     logs = sorted((r for r in json.load(open(a.ct_logs))["changes"] if r.get("crlite_enrolled")),
                   key=lambda r: r["logID"])
     leaves = {}
-    sample = {"seed": a.seed, "tiles": a.tiles, "batches": a.batches, "batch_size": a.batch_size, "logs": []}
+    now = lambda: datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    sample = {"seed": a.seed, "tiles": a.tiles, "batches": a.batches, "batch_size": a.batch_size, "started": now(),
+              "logs": []}
     for log in logs:
         url = log["url"].rstrip("/") + "/"
         rec = {"logID": log["logID"], "description": log.get("description"), "url": url, "tiled": bool(log.get("tiled"))}
         try:
             if log.get("tiled"):
-                size = int(fetch(url + "checkpoint", a.pause).decode().splitlines()[1])
+                checkpoint = fetch(url + "checkpoint", a.pause).decode()
+                size = int(checkpoint.splitlines()[1])
                 full = size // 256
-                rec.update(tree_size=size, tiles=sorted(rng.sample(range(full), min(a.tiles, full))) if full else [])
-                rec["indices"] = []
-                for t in rec["tiles"]:
+                chosen = sorted(rng.sample(range(full), min(a.tiles, full))) if full else []
+                rec.update(tree_size=size, checkpoint=checkpoint, tiles=[])
+                for t in chosen:
                     for i, (kind, der) in enumerate(tile_leaves(fetch(url + "tile/data/" + tile_path(t), a.pause))):
                         leaves.setdefault(hashlib.sha256(der).hexdigest(), (log["logID"], t * 256 + i, kind, der))
+                    rec["tiles"].append(t)
             else:
-                size = json.loads(fetch(url + "ct/v1/get-sth", a.pause))["tree_size"]
-                rec.update(tree_size=size, indices=[])
+                sth = json.loads(fetch(url + "ct/v1/get-sth", a.pause))
+                size = sth["tree_size"]
+                rec.update(tree_size=size, sth=sth, indices=[])
                 for _ in range(a.batches if size else 0):
                     start = rng.randrange(size)
                     end = min(size - 1, start + a.batch_size - 1)
-                    entries = json.loads(fetch("%sct/v1/get-entries?start=%d&end=%d" % (url, start, end), a.pause))["entries"]
-                    rec["indices"].append([start, start + len(entries) - 1])
-                    for i, e in enumerate(entries):
-                        kind, der = rfc6962_leaf(e)
-                        leaves.setdefault(hashlib.sha256(der).hexdigest(), (log["logID"], start + i, kind, der))
+                    at = start
+                    while at <= end:  # logs cap a response: page until the batch is complete
+                        entries = json.loads(fetch("%sct/v1/get-entries?start=%d&end=%d" % (url, at, end), a.pause))["entries"]
+                        if not entries:
+                            break
+                        for i, e in enumerate(entries):
+                            kind, der = rfc6962_leaf(e)
+                            leaves.setdefault(hashlib.sha256(der).hexdigest(), (log["logID"], at + i, kind, der))
+                            if at + i == start:
+                                rec["indices"].append([start, start])
+                            rec["indices"][-1][1] = at + i
+                        at += len(entries)
         except Exception as e:  # a log that fails is recorded, never silently dropped
             rec["error"] = "%s: %s" % (type(e).__name__, e)
         sample["logs"].append(rec)
         print("%-40s %s %s" % (log.get("description", "")[:40], rec.get("tree_size"), rec.get("error", len(leaves))),
               file=sys.stderr)
-    buf = io.StringIO()
-    for sha in sorted(leaves):
-        log_id, index, kind, der = leaves[sha]
-        buf.write("%s\t%s\t%d\t%d\t%s\n" % (sha, log_id, index, kind, base64.b64encode(der).decode()))
-    with open(a.out + "/leaves.tsv.gz", "wb") as f:
-        f.write(gzip.compress(buf.getvalue().encode(), 9, mtime=0))
+    write_leaves(a.out, leaves)
     sample["distinct_leaves"] = len(leaves)
+    sample["finished"] = now()
     with open(a.out + "/sample.json", "w") as f:
         json.dump(sample, f, indent=1, sort_keys=True)
         f.write("\n")

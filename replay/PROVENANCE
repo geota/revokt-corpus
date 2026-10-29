@@ -1,14 +1,14 @@
 source: revokt's recorders (native/revokt-oracle/record-goldens.sh, then native/producer-oracle/record-goldens.sh) with
   REVOKT_CORPUS naming this tree, for the inputs of this repository's corpora (x509-limbo/, issuer/, ct-seed/); regenerated in place, the goldens never
   edited by hand
-recorded: 2026-10-25 (re-recorded with issuer/ and ct-seed/ for tag v3), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
+recorded: 2026-10-25 (re-recorded with issuer/ and ct-seed/ for tag v3, and with the full ct-seed/ in shards for tag v4, 2026-10-29), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
   matrix of revokt's gradle/oracle-matrix.properties); compressed with macOS gzip -9n (Apple gzip 479), so another gzip
   changes the .gz bytes, not their content
 oracles: 3a x509-parser 0.18.1 and 3b revokt's locator (native/revokt-oracle); 4 mozilla/crlite/go
   v0.0.0-20260803162627-008299826177 with certificate-transparency-go v1.3.2 and zcrypto
   v0.0.0-20260109180747-df961ee46a6c on Go 1.27.3 (native/producer-oracle); zlint v3.7.2 (native/zlint-oracle)
-files: 3a.tsv.gz, 3b.tsv.gz (keyed by the SHA-256 of each input and of each read), producer.tsv.gz, zlint.tsv.gz (keyed
-  by the SHA-256 of canon), records.jsonl (spec §9.2 corpus records; the 199 D8-gap justifications no rule yields were
+files: 3a/, 3b/ (keyed by the SHA-256 of each input and of each read), producer/, zlint/ (keyed by the SHA-256 of
+  canon), each in 16 shards <0-f>.tsv.gz by the key's first hex digit, records.jsonl (spec §9.2 corpus records; the 199 D8-gap justifications no rule yields were
   written per entry by tools/limbo-gap-justifications/ from the form that fails the keyability clause, and the
-  recorders keep them; revokt #57 is the profile decision for the 15 lint-clean entries and the P-192 key)
+  recorders keep them; the 4 lint-clean D8-gap leaves of ct-seed/ (a notBefore of year 0000 or 0001) carry justifications written per entry, for their KEYABILITY_GAP and CONSCRYPT_TIME_JULIAN records; revokt #57 is the profile decision for the 15 lint-clean x509-limbo entries, the P-192 key and the 4 ct-seed K6 leaves)
 licence: Apache-2.0 (LICENSE at the root)

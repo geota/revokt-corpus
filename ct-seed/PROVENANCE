@@ -1,17 +1,35 @@
-A pilot of revokt's CT seed corpus (spec §9.2: at least 100 000 CT leaves across the CRLite-enrolled logs),
-collected on 2026-10-25 by tools/ct-seed/collect.py:
-  python3 -I tools/ct-seed/collect.py --ct-logs ct-seed/ct-logs.json --seed 20261025 --tiles 1 --batches 4 --out ct-seed
+The seed corpus's CT leaves for revokt's spec §9.2 (at least 100 000 CT leaves across the CRLite-enrolled logs),
+collected from 2026-10-25T23:56:38Z to 2026-10-26T00:22:38Z by tools/ct-seed/collect.py:
+  python3 -I tools/ct-seed/collect.py --ct-logs ct-seed/ct-logs.json --seed 20261026 --tiles 5 --batches 8 --out ct-seed
 ct-logs.json
   url: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/ct-logs/changeset?_expected=0
-  retrieved: 2026-10-25T18:25:31Z
+  retrieved: 2026-10-25T23:56:38Z
   sha256: a611aa4ab116e0bb95dc8430e7f7223125a8524a181c8fe673014cc26faa5fa3
-leaves.tsv.gz: 22559 distinct certificates as logged (final certificates of x509 entries, precertificates of precert
-  entries), from one random full data tile of each static-ct-api log and four random get-entries batches of each
-  RFC 6962 log, from 80 of the 81 CRLite-enrolled logs; sample.json records every log, tree size and index read, and the
-  one log that did not answer (Let's Encrypt Oak2026h2, get-sth).
-  sha256: 0493d6b4e24e7c90c722d7308bc3aed2508332e0f219c04324413afccc99fb1b
+leaves/<0-f>.tsv.gz: 110043 distinct certificates as logged (final certificates of x509 entries, precertificates of
+  precert entries) out of 118528 entries read, from five random full data tiles of each static-ct-api log and eight
+  random 256-entry get-entries batches of each RFC 6962 log, paged until complete, among the 81 CRLite-enrolled logs;
+  80 logs answered, and one did not (Let's Encrypt Oak2026h2, get-sth). sample.json records each log's checkpoint or
+  signed tree head as read, the tiles read and the index ranges read. The run wrote one leaves.tsv.gz (96 MB); its
+  lines were split by the collector's own write_leaves into the 16 shards by the sha256's first hex digit, unchanged.
+  collect.py has since recorded a batch's range as each entry is kept, not once the batch is done; every batch of the
+  run was complete, so sample.json is what it would write.
+  leaves/0.tsv.gz  sha256 805e007320d6dac3c11b712e7eb8f9c83003e7e29b03eb65e7fd4276dc904bb8
+  leaves/1.tsv.gz  sha256 cc99d005c910bbfa464f019d9a6d10a6ad93f4e4084856bda483269eb3c980f9
+  leaves/2.tsv.gz  sha256 068083298b98eba90cf072b4163cd8fe1908c3fe3d895ddb641d140794d0eef8
+  leaves/3.tsv.gz  sha256 692cdd0c7bea79935ae69af6964d6a54093bf5c1faf9410db2d5dd7af471ef72
+  leaves/4.tsv.gz  sha256 3119490c54b95a89aa4029086c77cc3503c1cd9c656cdc79827bacbcce04c663
+  leaves/5.tsv.gz  sha256 2ef2a258a3669ad08ae0c8a37033da77af54600b212b7063ba8502517e4ea702
+  leaves/6.tsv.gz  sha256 63adad8e91063c514e7e0384165d106110909b010b719fd6d0df9649434efa3a
+  leaves/7.tsv.gz  sha256 723b6be46d2fe863c545234f8eb4043fc13d85e81774c080720c0cb5956dc8d4
+  leaves/8.tsv.gz  sha256 60967f286d4017f96c882c300d914156fca87dca3db498ab6017c88eb748781f
+  leaves/9.tsv.gz  sha256 dc1c18c1ef835cd82bdbb2af05319d1dbd130b81f594f25c74a5364c24955230
+  leaves/a.tsv.gz  sha256 7a1f6ff66272c8a19b30ae827d3d12a32c1cf95f5aebf6b4f0e5a359e64fa93c
+  leaves/b.tsv.gz  sha256 3a95b9ac0ace75843d88e4866ff0c23be393059ebaa812f5724db5d212ec2df6
+  leaves/c.tsv.gz  sha256 12177fbfd929502e54784e5c04444cd1d2b4eff27510f0fb5857377aeb5f477e
+  leaves/d.tsv.gz  sha256 3b53c30b275ddaa59dcc9839c094776b729bc6aaf26389dc912037090ccce065
+  leaves/e.tsv.gz  sha256 d6223eb9e94e801e35f244f0346d400c66092eede4d8098f31d104e68d372d08
+  leaves/f.tsv.gz  sha256 91e88011cb08202127cc5b65efa444bab7b0ddef468140ff588096280333ab0e
+  sample.json  sha256 09fd60b4cef27a6ff5e94a82639db6b8c788d6175f06b4d540e19c3599e58b20
+limits: entries are not checked against an inclusion proof; a log that serves fewer entries than its tree size
+  would show a shorter index range in sample.json.
 licence: the leaves are CT log entries, public records; ct-logs.json is Mozilla Remote Settings data.
-limits of this pilot's collector (to be addressed for the full corpus, revokt #64): some logs return fewer get-entries
-  than asked (23 343 entries were read against a nominal 36 608), and the collector does not page; sample.json has
-  no collection timestamp (the ct-logs snapshot's retrieval time stands for it); a tiled log's "indices" is empty
-  and its "tiles" lists the tiles chosen; entries are not checked against a checkpoint or an inclusion proof.
