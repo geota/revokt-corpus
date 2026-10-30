@@ -1,7 +1,8 @@
 source: revokt's recorders (native/revokt-oracle/record-goldens.sh, then native/producer-oracle/record-goldens.sh) with
   REVOKT_CORPUS naming this tree, for the inputs of this repository's corpora (x509-limbo/, issuer/, ct-seed/); regenerated in place, the goldens never
   edited by hand
-recorded: 2026-10-25 (re-recorded with issuer/ and ct-seed/ for tag v3, and with the full ct-seed/ in shards for tag v4, 2026-10-29), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
+recorded: 2026-10-25 (re-recorded with issuer/ and ct-seed/ for tag v3, with the full ct-seed/ in shards for tag v4, and
+  for tag v5 with ct-seed/logs/ and ct-seed/crtsh/, zlint's error text without Go pointers (revokt #67), 2026-10-29), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
   matrix of revokt's gradle/oracle-matrix.properties); compressed with macOS gzip -9n (Apple gzip 479), so another gzip
   changes the .gz bytes, not their content
 oracles: 3a x509-parser 0.18.1 and 3b revokt's locator (native/revokt-oracle); 4 mozilla/crlite/go

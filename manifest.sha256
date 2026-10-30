@@ -1,8 +1,9 @@
 # sha256  path   (every file but this manifest and README.md; regenerated whenever a file changes, README.md "Manifest")
 7ebda0c44cb2e42e282e2d3ac0c17d4f7dbf1f1a094490c171831c73f203e58f  .gitattributes
 074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff  LICENSE
-9b9df74b392b331c589ce3b5faed0decc1efbaa936c885d4a8228f35a0d94a41  ct-seed/PROVENANCE
-aa507bcdc5880b4fa81255dc3ebe73cf51905bdd280437debdbb2f65f9bc2c36  ct-seed/crtsh.json
+add45f67860fb3870046dc7d744763113fa9df7957311cc23865efbba80843d3  ct-seed/PROVENANCE
+e28d1ef203750fda11290168ec303f068b29959b337bf30e53d36ec2ef813418  ct-seed/crtsh-ca.json
+8c843f09a8e206749f7621dd93cf6c82567e5162e58a401b164613de9f72fb87  ct-seed/crtsh.json
 c3891d0f3014610db419ccffc60a9eba04daf84a76b5bdc9bc7855b1a94c15a1  ct-seed/crtsh/0.tsv.gz
 39f325ddf60bfe436c782f1132abac2241f832e390c962c9376cdfe886a00fb7  ct-seed/crtsh/1.tsv.gz
 9f95b9951cea678610da2c65441b492752070a0d42c05c8f90ae1018e2839846  ct-seed/crtsh/2.tsv.gz
@@ -281,7 +282,7 @@ ecd563708e90f23d9d1942f7b46fa4d559fead865f8527defde5c40b08752213  replay/3b/c.ts
 6a0655d14dd672248a1e67bbe43375b2958da10037e64918f9a5ceea96c6e365  replay/3b/d.tsv.gz
 c12c66f5d6c88be97548d196c1ad28c617f14a425e07e5445f31eb411bbfd531  replay/3b/e.tsv.gz
 a6891e63c1a35f182342439c3e78741c2f0d57619c2762dad8a522d20b3e2032  replay/3b/f.tsv.gz
-cd6222555652f80ea125afde9d2110ba37923fb9b89d732b716bf7d75f2b59df  replay/PROVENANCE
+cb5cdf1497dc2f3e6ac760d9aea1609172f9c6f38a87abd2c19df80f52c29ef3  replay/PROVENANCE
 073b751fca59007a0ca974f65bfc13e2ecf678adc852bb7779e17931083a0b08  replay/producer/0.tsv.gz
 56327724f87050596313ed4b9f53763b1b8ac7f53b513741cb24a55afa63c1f0  replay/producer/1.tsv.gz
 a7e3dea07c4a689535369dbc299fc75c64b57276707668d678e360861fd877c6  replay/producer/2.tsv.gz
@@ -316,8 +317,8 @@ c2a28a4a1f64311d6859f26385a8e130fea2afa02b2584c5edb62c4a0f06a1a7  replay/zlint/c
 fddfd56c624f189b087f762b1fec21054f922c6e1c1b0243297d21eeff861759  replay/zlint/e.tsv.gz
 82d614194f5c9bb8de736ee39789c30dfb41ab5498a0446e2c1411729672e170  replay/zlint/f.tsv.gz
 845ba189a8ed25f1c853c4c9df5598ea1d6d730ae6250baec2b26cb62a63ee8f  tools/ct-seed/collect.py
-416728034a993b6d8c4d4b6d1c5ac3e31daade7d7cda42318c0daf2d5cdc2741  tools/ct-seed/drop-test-issuers.py
-6d3b6e401c5c2380cc2897380f53dc2cfbc487bf0737da806822751ba1f2e2bc  tools/ct-seed/topup.py
+36a49beaec3f60570e8dcc8d754ff6cac0234426a69d4a3c711d795ce8246c88  tools/ct-seed/drop-test-issuers.py
+9bbd95e6f9f790f0e8303f8dc6d7cd2bfb87aa27b4b08b61b7f4413e59df4653  tools/ct-seed/topup.py
 c5856a05253cc5665617e2e10fef53cb570d1af3e642d212925428a2b4bbd3d5  tools/limbo-gap-justifications/forms.py
 e1a5cc20e0f9a7b84cd537a2e8fd21ea473cf3749240f95133adf5bd3f9ec37f  tools/limbo-gap-justifications/justify.py
 aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe  x509-limbo/LICENSE

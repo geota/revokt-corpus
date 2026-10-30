@@ -9,7 +9,7 @@ issuer is found by a minimal DER walk of the certificate (Certificate, TBSCertif
 number, the signature algorithm, the issuer), so a line whose certificate is too malformed to walk is kept. Prints the
 lines dropped per issuer. Standard library only.
 
-  python3 -I drop-test-issuers.py --leaves ../../ct-seed/leaves --out ../../ct-seed/logs
+  python3 -I drop-test-issuers.py --leaves <revokt-corpus v4 checkout>/ct-seed/leaves --out ../../ct-seed/logs
 """
 
 import argparse

@@ -25,4 +25,4 @@ spec §9.2 differential parser oracle that revokt's CI checks out at a pinned ta
 | `replay/` | gzipped 3a, 3b, oracle-4 and zlint goldens for those inputs, each in 16 shards `<name>/<0-f>.tsv.gz` by the key's first hex digit, and their corpus records (`records.jsonl`); `PROVENANCE` names the recorders and pins | Apache-2.0 |
 | `tools/` | `limbo-gap-justifications/`, the generator of the written D8-gap justifications in `replay/records.jsonl`; `ct-seed/collect.py`, the CT log sampler, `ct-seed/drop-test-issuers.py`, which drops CT test traffic, and `ct-seed/topup.py`, the crt.sh top-up | Apache-2.0 |
 
-The repository's own files are Apache-2.0 (`LICENSE`); each corpus directory carries its upstream licence or notice (`x509-limbo/LICENSE`, `issuer/NOTICE`).
+The repository's own files are Apache-2.0 (`LICENSE`); each corpus directory carries its upstream licence or notice (`x509-limbo/LICENSE`, `issuer/NOTICE`; `ct-seed/PROVENANCE` states the CT seed's).

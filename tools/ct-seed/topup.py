@@ -33,7 +33,8 @@ add a TBSCertificate its issuer did not sign.
 The fetch is resumable: every statement's rows go to `--cache` (`ca.json`, then one `rows/<ca id>.json.gz` per CA) as
 it completes, and a later run with the same cache asks only for the CAs not yet there, against the first run's start.
 From the cache the tool writes `crtsh/<0-f>.tsv.gz` (sha256 of the DER, `crt.sh`, crt.sh certificate id, entry type,
-base64 DER; sorted by sha256, sharded by its first hex digit, `gzip -9n`) and `crtsh.json`: the collection's start
+base64 DER; sorted by sha256, sharded by its first hex digit, Python's gzip at level 9 with no name or time, so zlib
+decides the bytes) and `crtsh.json`: the collection's start
 and end, the query, and per index key its crt.sh CA ids, the certificates returned, rejected (structure or signature),
 filtered (not valid at the start, or a CA), duplicates, those past the cap, the crt.sh ids kept and any CA's error. One connection, one statement at a
 time, no prepared statements (crt.sh's pooler runs each statement on its own). A batch of CAs past crt.sh's statement
@@ -56,6 +57,7 @@ import os
 import platform
 import sys
 import time
+import zlib
 
 import cryptography
 import psycopg
@@ -367,7 +369,7 @@ def main():
            "finished": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
            "per_issuer": a.per_issuer, "query": LEAVES.strip(), "distinct_leaves": len(leaves), "keys": rec,
            "versions": {"cryptography": cryptography.__version__, "psycopg": psycopg.__version__,
-                        "python": platform.python_version()}}
+                        "python": platform.python_version(), "zlib": zlib.ZLIB_RUNTIME_VERSION}}
     atomic_write(a.out + "/crtsh.json", (json.dumps(out, indent=1, sort_keys=True) + "\n").encode())
     print("wrote %d distinct leaves" % len(leaves), file=sys.stderr)
 
