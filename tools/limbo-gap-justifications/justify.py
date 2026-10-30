@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0
 """Writes a justification into each blank-justified x509-limbo D8-gap record, from the form that fails its clause.
 
-Run once when the records gain gap entries no rule justifies (revokt's records writer leaves them blank and keeps
-what is written here on every later run):
-  python3 -I tools/limbo-gap-justifications/justify.py x509-limbo/limbo.json replay/records.jsonl tools/limbo-gap-justifications
+Run when the records gain gap entries no rule justifies (revokt's records writer leaves them blank and keeps
+what is written here on every later run), or when a text here changes: it writes every blank justification of an
+x509-limbo record and rewrites those it wrote before, which begin with "An x509-limbo vector (" (-B, so no
+__pycache__ joins the tree and its manifest):
+  python3 -I -B tools/limbo-gap-justifications/justify.py x509-limbo/limbo.json replay/records.jsonl tools/limbo-gap-justifications
 Every text is checked against the certificate's bytes and the record's keyability; an unknown form fails.
 """
 import json, sys
@@ -50,20 +52,21 @@ def text(r, d, ids):
            "and STRICT rejects it (§10 item 8)." % k['parser'])
     if k['zlint'] == 'unparseable' and k['clause'] == 'KEY':
         lint = (" zcrypto does not support the key, so zlint gives no verdict; the Baseline Requirements do not allow it in a "
-                "leaf; whether to widen K7 is #57.")
+                "leaf; K7 stays narrow (revokt spec revision 46, #57).")
     elif k['zlint'] == 'unparseable':
         lint = (" zcrypto cannot parse it, so zlint gives no verdict; it is a deliberately malformed vector, not a leaf a CA "
                 "issues.")
     else:
         assert k['zlint'].startswith('- -'), k
         if row in RESCANNED:
-            lint = (" zlint reports no error: a lint-clean gap entry, kept outside the profile because Appendix A's CT "
-                    "re-scan found no %s shape outside it; whether to widen the row is #57." % row)
+            lint = (" zlint reports no error: a lint-clean gap entry; the row stays narrow (revokt spec revision 46, #57), "
+                    "and Appendix A's CT re-scan found no %s shape outside it." % row)
         else:
-            lint = (" zlint reports no error: a lint-clean gap entry; Appendix A's CT re-scan did not cover this row, so "
-                    "keeping it narrow rests on the decision in #57.")
+            lint = (" zlint reports no error: a lint-clean gap entry; the row stays narrow (revokt spec revision 46, #57), "
+                    "though Appendix A's CT re-scan did not cover it.")
     return why + gap + lint
 
+MINE = "An x509-limbo vector ("
 limbo = json.load(open(sys.argv[1]))
 certs = {}
 for t in limbo['testcases']:
@@ -73,7 +76,8 @@ for t in limbo['testcases']:
 out = []; n = 0
 for line in open(sys.argv[2]):
     r = json.loads(line)
-    if not r['justification'].strip():
+    mine = r['justification'].startswith(MINE) and r['path'].startswith('x509-limbo/')
+    if not r['justification'].strip() or mine:
         d, ids = certs[r['path'].split('/')[1]]
         r['justification'] = text(r, d, sorted(ids)); n += 1
     out.append(json.dumps(r, ensure_ascii=False, separators=(',', ':')))

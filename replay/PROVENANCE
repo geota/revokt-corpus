@@ -2,7 +2,7 @@ source: revokt's recorders (native/revokt-oracle/record-goldens.sh, then native/
   REVOKT_CORPUS naming this tree, for the inputs of this repository's corpora (x509-limbo/, issuer/, ct-seed/); regenerated in place, the goldens never
   edited by hand
 recorded: 2026-10-25 (re-recorded with issuer/ and ct-seed/ for tag v3, with the full ct-seed/ in shards for tag v4, and
-  for tag v5 with ct-seed/logs/ and ct-seed/crtsh/, zlint's error text without Go pointers (revokt #67), 2026-10-29), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
+  for tag v5 with ct-seed/logs/ and ct-seed/crtsh/, zlint's error text without Go pointers (revokt #67), 2026-10-29; for tag v6 with the justifications of revokt spec revision 46, 2026-10-30), on JDKs 17.0.21, 21.0.13, 25.0.5 and 27.0.0 (Temurin) with Conscrypt 2.8.0 and 2.7.0 (the oracle
   matrix of revokt's gradle/oracle-matrix.properties); compressed with macOS gzip -9n (Apple gzip 479), so another gzip
   changes the .gz bytes, not their content
 oracles: 3a x509-parser 0.18.1 and 3b revokt's locator (native/revokt-oracle); 4 mozilla/crlite/go
@@ -11,5 +11,5 @@ oracles: 3a x509-parser 0.18.1 and 3b revokt's locator (native/revokt-oracle); 4
 files: 3a/, 3b/ (keyed by the SHA-256 of each input and of each read), producer/, zlint/ (keyed by the SHA-256 of
   canon), each in 16 shards <0-f>.tsv.gz by the key's first hex digit, records.jsonl (spec §9.2 corpus records; the 199 D8-gap justifications no rule yields were
   written per entry by tools/limbo-gap-justifications/ from the form that fails the keyability clause, and the
-  recorders keep them; the 4 lint-clean D8-gap leaves of ct-seed/ (a notBefore of year 0000 or 0001) carry justifications written per entry, for their KEYABILITY_GAP and CONSCRYPT_TIME_JULIAN records; revokt #57 is the profile decision for the 15 lint-clean x509-limbo entries, the P-192 key and the 4 ct-seed K6 leaves)
+  recorders keep them; the 4 lint-clean D8-gap leaves of ct-seed/ (a notBefore of year 0000 or 0001) carry justifications written per entry, for their KEYABILITY_GAP and CONSCRYPT_TIME_JULIAN records; revokt spec revision 46 (#57) keeps K6, K7 and K8 narrow for the 15 lint-clean x509-limbo entries, the P-192 key and the 4 ct-seed K6 leaves, and for tag v6 the 24 justifications that deferred to #57 cite it: justify.py rewrote the 16 x509-limbo ones, and the 8 of ct-seed/ were edited by hand)
 licence: Apache-2.0 (LICENSE at the root)
