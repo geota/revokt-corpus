@@ -35,7 +35,7 @@ it completes, and a later run with the same cache asks only for the CAs not yet 
 From the cache the tool writes `crtsh/<0-f>.tsv.gz` (sha256 of the DER, `crt.sh`, crt.sh certificate id, entry type,
 base64 DER; sorted by sha256, sharded by its first hex digit, Python's gzip at level 9 with no name or time, so zlib
 decides the bytes) and `crtsh.json`: the collection's start
-and end, the query, and per index key its crt.sh CA ids, the certificates returned, rejected (structure or signature),
+and the time the outputs were written, the query, and per index key its crt.sh CA ids, the certificates returned, rejected (structure or signature),
 filtered (not valid at the start, or a CA), duplicates, those past the cap, the crt.sh ids kept and any CA's error. One connection, one statement at a
 time, no prepared statements (crt.sh's pooler runs each statement on its own). A batch of CAs past crt.sh's statement
 timeout is asked again one CA at a time, and a CA that reaches it again is recorded, never silently dropped: in the

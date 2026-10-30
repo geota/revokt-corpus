@@ -31,7 +31,8 @@ index-keys.txt: the 1035 keys of the indexes of revokt's corpus/clubcard fixture
   checks them against the filters.
 
 crtsh/ and crtsh.json: the top-up, read from crt.sh's public PostgreSQL database (host crt.sh, port 5432, database
-  certwatch, user guest) from 2026-10-29T14:02:24Z to 2026-10-29T23:06:44Z by tools/ct-seed/topup.py
+  certwatch, user guest) from 2026-10-29T14:02:24Z to 2026-10-29T23:06:44Z, the end of the last run that queried it, by
+  tools/ct-seed/topup.py
   (crtsh.json's versions: cryptography 46.0.3, psycopg 3.3.6, python 3.14.7, zlib 1.2.12):
     uv run --with 'psycopg[binary]==3.3.6' --with 'cryptography==46.0.3' python3 -I tools/ct-seed/topup.py \
         --index-keys ct-seed/index-keys.txt --sample ct-seed/logs --per-issuer 120 --cache <dir> --out ct-seed
@@ -62,7 +63,7 @@ crtsh/ and crtsh.json: the top-up, read from crt.sh's public PostgreSQL database
 
   ct-logs.json  sha256 a611aa4ab116e0bb95dc8430e7f7223125a8524a181c8fe673014cc26faa5fa3
   crtsh-ca.json  sha256 e28d1ef203750fda11290168ec303f068b29959b337bf30e53d36ec2ef813418
-  crtsh.json  sha256 8c843f09a8e206749f7621dd93cf6c82567e5162e58a401b164613de9f72fb87
+  crtsh.json  sha256 cd95babb8bb55ed04924ef8458c0eb7eb779f6ff9f716fbab082ba0aa215ad0c
   index-keys.txt  sha256 83db8c758c7bade059adb783b61c7a40366bc0eedaf4f27fa7a786a527e2a59f
   sample.json  sha256 09fd60b4cef27a6ff5e94a82639db6b8c788d6175f06b4d540e19c3599e58b20
   logs/0.tsv.gz  sha256 1991510933d62163713212c5a3d21f72ee36ce1f84077045c8dc771dcc4368a1
@@ -99,7 +100,7 @@ crtsh/ and crtsh.json: the top-up, read from crt.sh's public PostgreSQL database
   crtsh/f.tsv.gz  sha256 0a4ba5475e8cb472ea48ff20526f84cd8180bf072236c38cd967202a2287f551
   tools/ct-seed/collect.py  sha256 845ba189a8ed25f1c853c4c9df5598ea1d6d730ae6250baec2b26cb62a63ee8f
   tools/ct-seed/drop-test-issuers.py  sha256 36a49beaec3f60570e8dcc8d754ff6cac0234426a69d4a3c711d795ce8246c88
-  tools/ct-seed/topup.py  sha256 9bbd95e6f9f790f0e8303f8dc6d7cd2bfb87aa27b4b08b61b7f4413e59df4653
+  tools/ct-seed/topup.py  sha256 2a94c3db9eeb17023114c51e25c1f4d5709655ace287bb1afa2ebf8bcd909858
 limits: log entries are not checked against an inclusion proof, and a log that serves fewer entries than its tree
   size would show a shorter index range in sample.json. crt.sh's certificates are checked against their issuers'
   keys only, not against any log. crt.sh's ca.last_not_after showed no update after 2026-10-24 (seen on 2026-10-29),
