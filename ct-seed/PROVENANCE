@@ -1,35 +1,99 @@
-The seed corpus's CT leaves for revokt's spec §9.2 (at least 100 000 CT leaves across the CRLite-enrolled logs),
-collected from 2026-10-25T23:56:38Z to 2026-10-26T00:22:38Z by tools/ct-seed/collect.py:
-  python3 -I tools/ct-seed/collect.py --ct-logs ct-seed/ct-logs.json --seed 20261026 --tiles 5 --batches 8 --out ct-seed
+The seed corpus's CT leaves for revokt's spec §9.2 (revision 45: at least 100 000 CT leaves of the index issuers, the
+issuers of the fixture generation's CRLite filters), in two sets: the log sample (logs/) and the crt.sh top-up
+(crtsh/). Each set is 16 shards <0-f>.tsv.gz by the sha256's first hex digit: sha256 of the DER, source, index or
+crt.sh id, entry type (0 x509, 1 precert), base64 DER.
+
+logs/: the random log sample of revokt-corpus v4 (ct-seed/leaves/ there) without CT test traffic.
+  The sample was collected from 2026-10-25T23:56:38Z to 2026-10-26T00:22:38Z by tools/ct-seed/collect.py:
+    python3 -I tools/ct-seed/collect.py --ct-logs ct-seed/ct-logs.json --seed 20261026 --tiles 5 --batches 8 --out ct-seed
+  110043 distinct certificates as logged (final certificates of x509 entries, precertificates of precert entries)
+  out of 118528 entries read, from five random full data tiles of each static-ct-api log and eight random 256-entry
+  get-entries batches of each RFC 6962 log, paged until complete, among the 81 CRLite-enrolled logs; 80 logs
+  answered, and one did not (Let's Encrypt Oak2026h2, get-sth). sample.json records each log's checkpoint or signed
+  tree head as read, the tiles read and the index ranges read; its distinct_leaves is the sample's before the drop.
+  tools/ct-seed/drop-test-issuers.py then copied the shards line for line without the leaves whose issuer Name (DER,
+  by SHA-256) is a CT test issuer, which log operators and monitors use to test logs and no root program trusts:
+    python3 -I tools/ct-seed/drop-test-issuers.py --leaves <v4 checkout>/ct-seed/leaves --out ct-seed/logs
+    dropped 35447: C=GB, ST=London, O=Google UK Ltd., OU=Certificate Transparency, CN=Merge Delay Intermediate 1
+    dropped  7407: O=Geomys, CN=CT Uptime Test Root
+    dropped  1598: CN=DigiCert CT Monitor, C=US, ST=UT, L=Lehi City, O=DigiCert, Inc.
+    dropped     2: C=CN, O=TrustAsia Technologies, Inc., CN=TrustAsia DV TLS ECC Test CA G4
+  65589 leaves remain.
 ct-logs.json
   url: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/ct-logs/changeset?_expected=0
   retrieved: 2026-10-25T23:56:38Z
   sha256: a611aa4ab116e0bb95dc8430e7f7223125a8524a181c8fe673014cc26faa5fa3
-leaves/<0-f>.tsv.gz: 110043 distinct certificates as logged (final certificates of x509 entries, precertificates of
-  precert entries) out of 118528 entries read, from five random full data tiles of each static-ct-api log and eight
-  random 256-entry get-entries batches of each RFC 6962 log, paged until complete, among the 81 CRLite-enrolled logs;
-  80 logs answered, and one did not (Let's Encrypt Oak2026h2, get-sth). sample.json records each log's checkpoint or
-  signed tree head as read, the tiles read and the index ranges read. The run wrote one leaves.tsv.gz (96 MB); its
-  lines were split by the collector's own write_leaves into the 16 shards by the sha256's first hex digit, unchanged.
-  collect.py has since recorded a batch's range as each entry is kept, not once the batch is done; every batch of the
-  run was complete, so sample.json is what it would write.
-  leaves/0.tsv.gz  sha256 805e007320d6dac3c11b712e7eb8f9c83003e7e29b03eb65e7fd4276dc904bb8
-  leaves/1.tsv.gz  sha256 cc99d005c910bbfa464f019d9a6d10a6ad93f4e4084856bda483269eb3c980f9
-  leaves/2.tsv.gz  sha256 068083298b98eba90cf072b4163cd8fe1908c3fe3d895ddb641d140794d0eef8
-  leaves/3.tsv.gz  sha256 692cdd0c7bea79935ae69af6964d6a54093bf5c1faf9410db2d5dd7af471ef72
-  leaves/4.tsv.gz  sha256 3119490c54b95a89aa4029086c77cc3503c1cd9c656cdc79827bacbcce04c663
-  leaves/5.tsv.gz  sha256 2ef2a258a3669ad08ae0c8a37033da77af54600b212b7063ba8502517e4ea702
-  leaves/6.tsv.gz  sha256 63adad8e91063c514e7e0384165d106110909b010b719fd6d0df9649434efa3a
-  leaves/7.tsv.gz  sha256 723b6be46d2fe863c545234f8eb4043fc13d85e81774c080720c0cb5956dc8d4
-  leaves/8.tsv.gz  sha256 60967f286d4017f96c882c300d914156fca87dca3db498ab6017c88eb748781f
-  leaves/9.tsv.gz  sha256 dc1c18c1ef835cd82bdbb2af05319d1dbd130b81f594f25c74a5364c24955230
-  leaves/a.tsv.gz  sha256 7a1f6ff66272c8a19b30ae827d3d12a32c1cf95f5aebf6b4f0e5a359e64fa93c
-  leaves/b.tsv.gz  sha256 3a95b9ac0ace75843d88e4866ff0c23be393059ebaa812f5724db5d212ec2df6
-  leaves/c.tsv.gz  sha256 12177fbfd929502e54784e5c04444cd1d2b4eff27510f0fb5857377aeb5f477e
-  leaves/d.tsv.gz  sha256 3b53c30b275ddaa59dcc9839c094776b729bc6aaf26389dc912037090ccce065
-  leaves/e.tsv.gz  sha256 d6223eb9e94e801e35f244f0346d400c66092eede4d8098f31d104e68d372d08
-  leaves/f.tsv.gz  sha256 91e88011cb08202127cc5b65efa444bab7b0ddef468140ff588096280333ab0e
+
+index-keys.txt: the 1035 keys of the indexes of revokt's corpus/clubcard fixture filters
+  (compat-full/20261017-1-compat.filter and compat-delta/20261021-1-compat.filter.delta), base64url, sorted; revokt's
+  CtSeedTest checks them against the filters.
+
+crtsh/ and crtsh.json: the top-up, read from crt.sh's public PostgreSQL database (host crt.sh, port 5432, database
+  certwatch, user guest) from 2026-10-29T14:02:24Z to 2026-10-29T23:06:44Z by tools/ct-seed/topup.py
+  (crtsh.json's versions: cryptography 46.0.3, psycopg 3.3.6, python 3.14.7):
+    uv run --with 'psycopg[binary]==3.3.6' --with 'cryptography==46.0.3' python3 -I tools/ct-seed/topup.py \
+        --index-keys ct-seed/index-keys.txt --sample ct-seed/logs --per-issuer 120 --cache <dir> --out ct-seed
+  resumed on the same cache after interruptions, some legs with --batch 1, one with --retry-timeouts; the legs ran
+  earlier versions of the tool with the same query (crtsh.json's query; the cache records its SHA-256), and the last
+  leg, with the version hashed below, wrote every output from the cache. For each index key, the
+  crt.sh CAs whose public key hashes to it (1036 CAs for 1034 keys; 1 key has none), and for each CA at most 120 of
+  its most recently issued certificates (issued in the 400 days before the start) that are valid at the start
+  and cannot issue certificates; crtsh.json records the query. crt.sh returned 71629 certificates: 0 rejected
+  (structure or signature), 0 filtered (not valid at the start, or a CA), 15 duplicates of a TBSCertificate
+  already kept or in logs/, 0 past the cap, and 71614 kept, for 927 keys. The queries of 49 CAs reached crt.sh's
+  statement timeout on every try and are recorded in crtsh.json as their keys' errors: CA ids 904, 64135, 158799,
+  158800, 204407, 204411, 221388, 247106, 247107, 247108, 247110, 247112, 247114, 247115, 247116, 247118, 247120,
+  282053, 282054, 286234, 286236, 286242, 286243, 286244, 291200, 391370, 405762, 412165, 422998, 439355, 439892,
+  439906, 439910, 439917, 439918, 439929, 439930, 440026, 440027, 440028, 440029, 440032, 440033, 440034, 440035,
+  440042, 440043, 440044, 440061.
+  trust: crt.sh's database serves TLS under a certificate that expired on 2026-06-21, so the connection is encrypted
+  but not authenticated, and nothing crt.sh sends is trusted. A CA's public key is used only when its SHA-256 is the
+  index key, and a certificate is kept only when it is one minimally encoded v3 Certificate whose signature verifies
+  under that key, with no TBSCertificate kept twice; an attacker on the path can withhold certificates, which the
+  counts show, but not add one its issuer did not sign. revokt's CtSeedTest verifies every kept leaf again on the JDK.
+
+  ct-logs.json  sha256 a611aa4ab116e0bb95dc8430e7f7223125a8524a181c8fe673014cc26faa5fa3
+  crtsh.json  sha256 aa507bcdc5880b4fa81255dc3ebe73cf51905bdd280437debdbb2f65f9bc2c36
+  index-keys.txt  sha256 83db8c758c7bade059adb783b61c7a40366bc0eedaf4f27fa7a786a527e2a59f
   sample.json  sha256 09fd60b4cef27a6ff5e94a82639db6b8c788d6175f06b4d540e19c3599e58b20
-limits: entries are not checked against an inclusion proof; a log that serves fewer entries than its tree size
-  would show a shorter index range in sample.json.
-licence: the leaves are CT log entries, public records; ct-logs.json is Mozilla Remote Settings data.
+  logs/0.tsv.gz  sha256 1991510933d62163713212c5a3d21f72ee36ce1f84077045c8dc771dcc4368a1
+  logs/1.tsv.gz  sha256 2f66833cd11d9a7463261651f4de31f75a27a66ae85c62d2c6e9ee9ded32cf9b
+  logs/2.tsv.gz  sha256 7394098f50f4b99ec4d3efbc5cfee8890f808def00f714954596eb4256e5d2cb
+  logs/3.tsv.gz  sha256 e3b43ad2b62dfbb8b7c899ff8731be44c3111205d8124a59c02418de32f47e6b
+  logs/4.tsv.gz  sha256 b2266b9c20e2a33558dc1cff7417dbafb219c558173bca36571137d560d42b1d
+  logs/5.tsv.gz  sha256 69e075b6b93d66aee4bb2765a1cc46ddbb9096316d973c3c4874d031559df16b
+  logs/6.tsv.gz  sha256 44d7cd391bff86fc7a1a30762d6db50464682f368872658ed4ca3f8fa1fd1d70
+  logs/7.tsv.gz  sha256 40eb4f161da870daf6e52e8a07586566bd68a81778c788147405f549b3ae9629
+  logs/8.tsv.gz  sha256 a3776b4515fe152c1c68990085334a7d59bc04088f97910508835639b8491b15
+  logs/9.tsv.gz  sha256 90de6dd925933f3fa95647235904f3e4554407d9e303d8077acb7d9a7ac8bfd2
+  logs/a.tsv.gz  sha256 dd899feaad14bc7e88e2017db42970ba466de6c672756886a60d2b3d8c5382cd
+  logs/b.tsv.gz  sha256 2bd2bb3d64ec423992bac3ff542f9b8a461bd117ddb4a553c3cdfc1c86c2511d
+  logs/c.tsv.gz  sha256 43e5c81e0be2269ba4a76378104d9e4777bfb35d23c8c712c73933b958087519
+  logs/d.tsv.gz  sha256 09fd28752d47b76167b7fab4e2cec98c33225d30c2793163065eee23c77f191a
+  logs/e.tsv.gz  sha256 3942c5381447e14236dce76cd53186eb0a81a498f71a48175a1d0a62d17a1af7
+  logs/f.tsv.gz  sha256 6f6fcf47e9355277b3433ee922abfadd9a1180ecc180ca75f57e33f0b05893e3
+  crtsh/0.tsv.gz  sha256 c3891d0f3014610db419ccffc60a9eba04daf84a76b5bdc9bc7855b1a94c15a1
+  crtsh/1.tsv.gz  sha256 39f325ddf60bfe436c782f1132abac2241f832e390c962c9376cdfe886a00fb7
+  crtsh/2.tsv.gz  sha256 9f95b9951cea678610da2c65441b492752070a0d42c05c8f90ae1018e2839846
+  crtsh/3.tsv.gz  sha256 19d7c05cb43608cbaa87b9210aa6f037daad6224ad2f925303ba98367b75c1a2
+  crtsh/4.tsv.gz  sha256 1cadb2b2b5db71ac58ede132cba5b17e11881bdadcc1953da14c6538e357c825
+  crtsh/5.tsv.gz  sha256 95868152a6e3cca098561c8af4ac50a36debc55951393206a2ec036c85ec301c
+  crtsh/6.tsv.gz  sha256 09305314ab5d927c841822881221f2edef08f7de7d4904451636db9a78f7b21b
+  crtsh/7.tsv.gz  sha256 32991909a953bad701abbe7c1266b07a88f1638e64e924540346ddf5de18ee3d
+  crtsh/8.tsv.gz  sha256 d51ed5fdd80975b815b2d2090b3b0f9c02869854c4711ead5cc7d04f717dd4d8
+  crtsh/9.tsv.gz  sha256 9081209bb4fe3641cdc7f76ac826dd0baf20a66614a857031f851f6da16dd8ef
+  crtsh/a.tsv.gz  sha256 3a1c31d5707d8eacb2e1e1514a554c40b3e61a412bb4e53c9387478fd95923dc
+  crtsh/b.tsv.gz  sha256 83df17fd892bac26f932db7446aced91a60adc8041ed7eee60d5c877a407c3b7
+  crtsh/c.tsv.gz  sha256 a9dc9c13cbb978b2a0a17e4932dc45c3e3349e06a98ecb000dcef43f596bc733
+  crtsh/d.tsv.gz  sha256 8dcf1eaf84baf33425ef2d18819603eeed1f6ae3f154091c1e5ecdf454424c04
+  crtsh/e.tsv.gz  sha256 b3538338cede6eac0eca4c024e7a65fab44f5f337fcea2690dcd012de485c8f6
+  crtsh/f.tsv.gz  sha256 0a4ba5475e8cb472ea48ff20526f84cd8180bf072236c38cd967202a2287f551
+  tools/ct-seed/collect.py  sha256 845ba189a8ed25f1c853c4c9df5598ea1d6d730ae6250baec2b26cb62a63ee8f
+  tools/ct-seed/drop-test-issuers.py  sha256 416728034a993b6d8c4d4b6d1c5ac3e31daade7d7cda42318c0daf2d5cdc2741
+  tools/ct-seed/topup.py  sha256 6d3b6e401c5c2380cc2897380f53dc2cfbc487bf0737da806822751ba1f2e2bc
+limits: log entries are not checked against an inclusion proof, and a log that serves fewer entries than its tree
+  size would show a shorter index range in sample.json. crt.sh's certificates are checked against their issuers'
+  keys only, not against any log. crt.sh's ca.last_not_after was not updated after 2026-10-24, so CAs were chosen by
+  key, not by recorded activity.
+licence: the leaves are CT log entries, public records; crt.sh states no data licence, and its certificates are
+  CA-published, unmodified. ct-logs.json is Mozilla Remote Settings data.
