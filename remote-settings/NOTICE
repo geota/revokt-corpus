@@ -1,0 +1,7 @@
+Notices for remote-settings/ (revokt-corpus)
+
+Mozilla Remote Settings (security-state/cert-revocations)
+  cert-revocations/ holds a changeset of Mozilla's CRLite collection, as Firefox fetches it, and the content-signature
+  certificate chain (x5u) its signature names. Mozilla publishes both openly for every Firefox client and states no
+  data licence for them; revokt-corpus redistributes them unmodified as test data. The certificates are published by
+  Mozilla's content-signature service.

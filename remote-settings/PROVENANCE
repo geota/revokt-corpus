@@ -1,0 +1,22 @@
+Mozilla Remote Settings changesets for revokt's corpus tier (revokt #113; spec §6.5's JSON budget "on the pinned
+corpus's real Remote Settings changeset", §7.1's changeset and x5u chain, Appendix A's pinned root). Each file is the
+response body exactly as served, unmodified. Attachment bodies are not recorded. Retrieval times are the recorder's UTC
+clock; "http-date" is the response's Date header (the x5u's is a CDN cache's).
+
+cert-revocations/2026-11-19/changeset.json
+  url: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/cert-revocations/changeset?_expected=1795013822109
+  retrieved: 2026-11-19T00:43:41Z
+  http-date: Thu, 19 Nov 2026 00:43:41 GMT
+  sha256: 5452242068d9a3580b2b69adb455d93541157f3678852b35f994e4e6516e1a8f
+  note: _expected is the collection's last_modified that monitor/changes listed at 2026-11-19T00:43:31Z; the
+    changeset's timestamp is 1795013822109, with 130 records (65 compat, 65 default) and no tombstone
+cert-revocations/2026-11-19/x5u.pem
+  url: https://content-signature-2.cdn.mozilla.net/g/chains/202402/onecrl.content-signature.mozilla.org-2027-01-04-22-29-07.chain
+  retrieved: 2026-11-19T00:43:49Z
+  http-date: Wed, 18 Nov 2026 03:16:27 GMT
+  sha256: ba77f87d15fc04faa62e0d99b423cce174305cc25364126506758dce773ff27b
+  note: the x5u of the changeset's metadata.signature and its one metadata.signatures[] entry; leaf
+    onecrl.content-signature.mozilla.org valid 2026-10-16T22:29:07Z to 2027-01-04T22:29:07Z; its terminal
+    root-ca-production-amo has SPKI SHA-256 3317FA45154AC7DA55694D3782316056471FC147C04AED3E03FFE99565B1E2E7, the pin
+    of revokt's spec Appendix A
+licence: see NOTICE
